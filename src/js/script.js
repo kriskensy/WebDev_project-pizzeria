@@ -59,8 +59,8 @@ const select = {
       thisProduct.data = data;
 
       thisProduct.renderInMenu();
-      console.log('new Product: ', thisProduct);
-
+      // console.log('new Product: ', thisProduct);
+      thisProduct.getElements();
       thisProduct.initAccordion();
     }
 
@@ -80,14 +80,24 @@ const select = {
       menuContainer.appendChild(thisProduct.element);
     }
 
+    getElements(){
+      const thisProduct = this;
+
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+    }
+
     initAccordion(){
       const thisProduct = this;
 
-      //find the clickable trigger
-      const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      // //find the clickable trigger
+      // const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
 
       //START: add event listener to clickable trigger on event click
-      clickableTrigger.addEventListener('click', function(event){
+      thisProduct.accordionTrigger.addEventListener('click', function(event){
         //prevent default action for event
         event.preventDefault();
         //find active product (with active class)
@@ -111,8 +121,8 @@ const select = {
         new Product(productData, thisApp.data.products[productData]);
       }
 
-      const testProduct = new Product();
-      console.log('testProduct: ', testProduct);
+      // const testProduct = new Product();
+      // console.log('testProduct: ', testProduct);
     },
     initData: function(){
       const thisApp = this;
