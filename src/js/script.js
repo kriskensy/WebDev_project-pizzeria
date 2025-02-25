@@ -62,6 +62,8 @@ const select = {
       // console.log('new Product: ', thisProduct);
       thisProduct.getElements();
       thisProduct.initAccordion();
+      thisProduct.initOrderForm();
+      thisProduct.processOrder();
     }
 
     renderInMenu(){
@@ -109,6 +111,53 @@ const select = {
         //toggle active class on thisProduct.element
         thisProduct.element.classList.toggle('active');
       });
+    }
+
+    initOrderForm(){
+      const thisProduct = this;
+      console.log('initOrderFrom: ', this);
+
+      thisProduct.form.addEventListener('submit', function(event){
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+
+      for(let input of thisProduct.formInputs){
+        input.addEventListener('change', function(){
+          thisProduct.processOrder();
+        });
+      }
+
+      thisProduct.cartButton.addEventListener('click', function(event){
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+    }
+
+    processOrder(){
+      const thisProduct = this;
+
+      //convert form to object structure
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      console.log('formData: ', formData);
+      //set price do default price
+      let price = thisProduct.data.price;
+      //for every category (param)...
+      for(let paramId in thisProduct.data.params){
+        //determine param value: paramID='toppings', param={label: 'Toppings', type: 'checkboxes'...}
+        const param = thisProduct.data.params[paramId];
+        console.log(paramId, param);
+
+        //for every option in this category
+        for(let optionId in param.options){
+          //determine option value: optionId='olives', option={label: 'Olives', price: 2, default: true}
+          const option = param.options[optionId];
+          console.log(optionId, option);
+          //TODO: sprawdzanie czy dana opcja danej kategorii jest wybrana
+        }
+      }
+      //update calculated price in the HTML
+      thisProduct.priceElem.innerHTML = price;
     }
   }
 
