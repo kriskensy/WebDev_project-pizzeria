@@ -153,7 +153,17 @@ const select = {
           //determine option value: optionId='olives', option={label: 'Olives', price: 2, default: true}
           const option = param.options[optionId];
           console.log(optionId, option);
-          //TODO: sprawdzanie czy dana opcja danej kategorii jest wybrana
+
+          //TODO: check if param=paramId in formData, check if it includes optionId
+          if(formData[paramId] && formData[paramId].includes(optionId)){
+            if(!option.default){
+              price = price + option.price;
+            }
+          } else {
+            if(option.default){
+              price = price - option.price;
+            }
+          }
         }
       }
       //update calculated price in the HTML
