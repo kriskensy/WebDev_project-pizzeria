@@ -90,6 +90,7 @@ const select = {
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion(){
@@ -139,29 +140,40 @@ const select = {
 
       //convert form to object structure
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData: ', formData);
+      // console.log('formData: ', formData);
       //set price do default price
       let price = thisProduct.data.price;
       //for every category (param)...
       for(let paramId in thisProduct.data.params){
         //determine param value: paramID='toppings', param={label: 'Toppings', type: 'checkboxes'...}
         const param = thisProduct.data.params[paramId];
-        console.log(paramId, param);
+        // console.log(paramId, param);
 
         //for every option in this category
         for(let optionId in param.options){
           //determine option value: optionId='olives', option={label: 'Olives', price: 2, default: true}
           const option = param.options[optionId];
-          console.log(optionId, option);
+          // console.log(optionId, option);
 
-          //TODO: check if param=paramId in formData, check if it includes optionId
-          if(formData[paramId] && formData[paramId].includes(optionId)){
+          // const optionImage = thisProduct.imageWrapper.querySelector(`.paramId-optionId`); //tak nie bo zwraca dokładną klasę
+          const optionImage = thisProduct.imageWrapper.querySelector(`.${paramId}-${optionId}`); //poprawnie bo z wartościami dynamicznymi
+          console.log('optionImage: ', optionImage);
+
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+          //check if param=paramId in formData, check if it includes optionId
+          if(optionSelected){
             if(!option.default){
               price = price + option.price;
+            }
+            if(optionImage){
+              optionImage.classList.add(classNames.menuProduct.imageVisible);
             }
           } else {
             if(option.default){
               price = price - option.price;
+            }
+            if(optionImage){
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
             }
           }
         }
