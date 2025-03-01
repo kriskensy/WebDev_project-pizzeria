@@ -180,6 +180,8 @@ const select = {
           }
         }
       }
+      //multiply price by amount
+      price *= thisProduct.amountWidget.value;
       //update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
     }
@@ -188,6 +190,9 @@ const select = {
       const thisProduct = this;
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+      thisProduct.amountWidgetElem.addEventListener('updated', function(event){
+        thisProduct.processOrder();
+      });
     }
   }
 
@@ -199,7 +204,13 @@ const select = {
       console.log('constructor arguments: ', element);
 
       thisWidget.getElements(element);
-      thisWidget.setValue(thisWidget.input.value);
+      // thisWidget.setValue(thisWidget.input.value);
+      if(thisWidget.input.value){
+        thisWidget.setValue(thisWidget.input.value);
+      } else{
+        thisWidget.setValue(settings.amountWidget.defaultValue);
+      }
+
       thisWidget.initActions();
     }
 
@@ -224,6 +235,8 @@ const select = {
       if(valueInputIsNumber){
         thisWidget.value = newValue;
       }
+      //info about product price change
+      thisWidget.announce();
       thisWidget.input.value = thisWidget.value;
     }
 
