@@ -290,6 +290,24 @@ const select = {
     }
   }
 
+  class Cart{
+    constructor(element){
+      const thisCart = this;
+
+      thisCart.products = [];
+      thisCart.getElements(element);
+
+      console.log('new Cart: ', thisCart);
+    }
+
+    getElements(element){
+      const thisCart = this;
+
+      thisCart.dom = {};
+      thisCart.dom.wrapper = element;
+    }
+  }
+
   const app = {
     initMenu: function(){
       const thisApp = this;
