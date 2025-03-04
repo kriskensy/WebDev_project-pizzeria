@@ -210,13 +210,12 @@ const select = {
           }
         }
       }
-      //multiply price by amount
-      price *= thisProduct.amountWidget.value;
 
       //equipping thisProduct with a new property
       thisProduct.priceSingle = price;
 
-      // console.log('priceSIngle: ', this.priceSingle);
+      //multiply price by amount
+      price *= thisProduct.amountWidget.value;
 
       //update calculated price in the HTML
       thisProduct.dom.priceElem.innerHTML = price;
@@ -250,6 +249,38 @@ const select = {
       };
 
       return productSummary;
+    }
+
+    prepareCartProductParams(){
+      const thisProduct = this;
+
+      //convert form to object structure
+      const formData = utils.serializeFormToObject(thisProduct.dom.form);
+      const params = {};
+
+      //for every category (param)...
+      for(let paramId in thisProduct.data.params){
+        //determine param value: paramID='toppings', param={label: 'Toppings', type: 'checkboxes'...}
+        const param = thisProduct.data.params[paramId];
+
+        //create category param in params const
+        params[paramId] = {
+          label: param.label,
+          options: {}
+        }
+
+        //for every option in this category
+        for(let optionId in param.options){
+          const option = param.options[optionId];
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+
+          if(optionSelected){
+
+          }
+        }
+      }
+
+      return params;
     }
   }
 
