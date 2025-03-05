@@ -94,6 +94,8 @@ const select = {
       thisProduct.initOrderForm();
       thisProduct.initAmountWidget();
       thisProduct.processOrder();
+      thisProduct.prepareCartProductParams();
+      thisProduct.prepareCartProduct();
     }
 
     renderInMenu(){
@@ -245,7 +247,8 @@ const select = {
         amount: thisProduct.amountWidget.value,
         priceSingle: thisProduct.priceSingle,
         price: thisProduct.priceSingle * thisProduct.amountWidget.value,
-        params: {},
+        // params: {},
+        params: thisProduct.prepareCartProductParams(),
       };
 
       return productSummary;
@@ -260,7 +263,6 @@ const select = {
 
       //for every category (param)...
       for(let paramId in thisProduct.data.params){
-        //determine param value: paramID='toppings', param={label: 'Toppings', type: 'checkboxes'...}
         const param = thisProduct.data.params[paramId];
 
         //create category param in params const
@@ -275,7 +277,7 @@ const select = {
           const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
 
           if(optionSelected){
-
+            params[paramId].options[optionId] = option.label;
           }
         }
       }
@@ -369,6 +371,7 @@ const select = {
       thisCart.dom = {};
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
     }
 
     initActions(){
@@ -381,9 +384,14 @@ const select = {
     }
 
     add(menuProduct){
-      // const thisCart = this;
+      const thisCart = this;
 
-      console.log('adding product: ', menuProduct);
+      //generate HTML based on template
+      const generatedHTML = templates.cartProduct(menuProduct);
+      //create DOM element
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+      //add DOM element to product list
+      thisCart.dom.productList.appendChild(generatedDOM);
     }
   }
 
