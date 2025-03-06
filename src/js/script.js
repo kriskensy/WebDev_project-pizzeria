@@ -88,7 +88,6 @@ const select = {
       thisProduct.dom = {};
 
       thisProduct.renderInMenu();
-      // console.log('new Product: ', thisProduct);
       thisProduct.getElements();
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
@@ -103,13 +102,10 @@ const select = {
 
       //generate HTML based on template
       const generatedHTML = templates.menuProduct(thisProduct.data);
-
       //create element using utils.createElementFromHTML
       thisProduct.element = utils.createDOMFromHTML(generatedHTML);
-
       //find menu container
       const menuContainer = document.querySelector(select.containerOf.menu);
-
       //add element to menu
       menuContainer.appendChild(thisProduct.element);
     }
@@ -149,7 +145,6 @@ const select = {
 
     initOrderForm(){
       const thisProduct = this;
-      // console.log('initOrderFrom: ', this);
 
       thisProduct.dom.form.addEventListener('submit', function(event){
         event.preventDefault();
@@ -174,24 +169,19 @@ const select = {
 
       //convert form to object structure
       const formData = utils.serializeFormToObject(thisProduct.dom.form);
-      // console.log('formData: ', formData);
       //set price do default price
       let price = thisProduct.data.price;
       //for every category (param)...
       for(let paramId in thisProduct.data.params){
         //determine param value: paramID='toppings', param={label: 'Toppings', type: 'checkboxes'...}
         const param = thisProduct.data.params[paramId];
-        // console.log(paramId, param);
 
         //for every option in this category
         for(let optionId in param.options){
           //determine option value: optionId='olives', option={label: 'Olives', price: 2, default: true}
           const option = param.options[optionId];
-          // console.log(optionId, option);
-
           // const optionImage = thisProduct.imageWrapper.querySelector(`.paramId-optionId`); //tak nie bo zwraca dokładną klasę
           const optionImage = thisProduct.dom.imageWrapper.querySelector(`.${paramId}-${optionId}`); //poprawnie bo z wartościami dynamicznymi
-          // console.log('optionImage: ', optionImage);
 
           const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
           //check if param=paramId in formData, check if it includes optionId
@@ -215,10 +205,8 @@ const select = {
 
       //equipping thisProduct with a new property
       thisProduct.priceSingle = price;
-
       //multiply price by amount
       price *= thisProduct.amountWidget.value;
-
       //update calculated price in the HTML
       thisProduct.dom.priceElem.innerHTML = price;
     }
@@ -260,11 +248,9 @@ const select = {
       //convert form to object structure
       const formData = utils.serializeFormToObject(thisProduct.dom.form);
       const params = {};
-
       //for every category (param)...
       for(let paramId in thisProduct.data.params){
         const param = thisProduct.data.params[paramId];
-
         //create category param in params const
         params[paramId] = {
           label: param.label,
@@ -290,11 +276,8 @@ const select = {
     constructor(element){
       const thisWidget = this;
 
-      console.log('AmountWidget: ', thisWidget);
-      console.log('constructor arguments: ', element);
-
       thisWidget.getElements(element);
-      // thisWidget.setValue(thisWidget.input.value);
+
       if(thisWidget.input.value){
         thisWidget.setValue(thisWidget.input.value);
       } else{
@@ -317,7 +300,6 @@ const select = {
       const thisWidget = this;
 
       const newValue = parseInt(value);
-
       //add validation
       const valueInputIsNumber = thisWidget.value !== newValue && !isNaN(newValue) &&
       newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax;
@@ -361,8 +343,6 @@ const select = {
       thisCart.products = [];
       thisCart.getElements(element);
       thisCart.initActions();
-
-      console.log('new Cart: ', thisCart);
     }
 
     getElements(element){
@@ -395,7 +375,14 @@ const select = {
       //add product to array
       // thisCart.products.push(menuProduct);
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
-      console.log('products: ', thisCart.products);
+    }
+
+    update(){
+      const thisCart = this;
+
+      const deliveryFee = thisCart.setValue(settings.cart.defaultDeliveryFee);
+      const totalNumber = 0;
+      const subtotalPrice = 0;
     }
   }
 
@@ -412,8 +399,6 @@ const select = {
 
       thisCartProduct.getElements(element);
       thisCartProduct.initAmountWidget();
-
-      console.log('thisCartProduct: ', thisCartProduct);
     }
 
     getElements(element){
@@ -430,11 +415,10 @@ const select = {
     initAmountWidget(){
       const thisCartProduct = this;
 
-      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidgetElem);
+      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
       thisCartProduct.dom.amountWidget.addEventListener('updated', function(){
         thisCartProduct.amount = thisCartProduct.amountWidget.value;
         thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
-
         //price update in HTML
         thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
       });
@@ -444,7 +428,6 @@ const select = {
   const app = {
     initMenu: function(){
       const thisApp = this;
-      console.log('thisApp.data: ', thisApp.data);
 
       for(let productData in thisApp.data.products){
         new Product(productData, thisApp.data.products[productData]);
@@ -465,11 +448,11 @@ const select = {
 
     init: function(){
       const thisApp = this;
-      console.log('*** App starting ***');
-      console.log('thisApp:', thisApp);
-      console.log('classNames:', classNames);
-      console.log('settings:', settings);
-      console.log('templates:', templates);
+      // console.log('*** App starting ***');
+      // console.log('thisApp:', thisApp);
+      // console.log('classNames:', classNames);
+      // console.log('settings:', settings);
+      // console.log('templates:', templates);
 
       thisApp.initData();
       thisApp.initMenu();
