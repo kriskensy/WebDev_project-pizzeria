@@ -352,6 +352,10 @@ const select = {
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
+      thisCart.dom.deliveryFee = thisCart.dom.wrapper.querySelector(select.cart.deliveryFee);
+      thisCart.dom.subtotalPrice = thisCart.dom.wrapper.querySelector(select.cart.subtotalPrice);
+      thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelector(select.cart.totalPrice);
+      thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(select.cart.totalNumber);
     }
 
     initActions(){
@@ -391,7 +395,7 @@ const select = {
         subtotalPrice = subtotalPrice + product.price;
       }
 
-      if(subtotalPrice !== 0){
+      if(totalNumber > 0){
         thisCart.totalPrice = subtotalPrice + deliveryFee;
       } else {
         thisCart.totalPrice = 0;
@@ -401,6 +405,12 @@ const select = {
       console.log('totalNumber: ', totalNumber);
       console.log('subtotalPrice: ', subtotalPrice);
       console.log('totalPrice: ', thisCart.totalPrice);
+
+      //update totalPrice, subtotalPrice, totalNumber, deliverFee in HTML
+      thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+      thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
+      thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
+      thisCart.dom.totalNumber.innerHTML = totalNumber;
     }
   }
 
