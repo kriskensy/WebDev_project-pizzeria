@@ -375,14 +375,32 @@ const select = {
       //add product to array
       // thisCart.products.push(menuProduct);
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
+
+      thisCart.update();
     }
 
     update(){
       const thisCart = this;
 
-      const deliveryFee = thisCart.setValue(settings.cart.defaultDeliveryFee);
-      const totalNumber = 0;
-      const subtotalPrice = 0;
+      const deliveryFee = settings.cart.defaultDeliveryFee;
+      let totalNumber = 0;
+      let subtotalPrice = 0;
+
+      for(const product of thisCart.products){
+        totalNumber = totalNumber + product.amount;
+        subtotalPrice = subtotalPrice + product.price;
+      }
+
+      if(subtotalPrice !== 0){
+        thisCart.totalPrice = subtotalPrice + deliveryFee;
+      } else {
+        thisCart.totalPrice = 0;
+      }
+
+      console.log('deliverFee: ', deliveryFee);
+      console.log('totalNumber: ', totalNumber);
+      console.log('subtotalPrice: ', subtotalPrice);
+      console.log('totalPrice: ', thisCart.totalPrice);
     }
   }
 
