@@ -125,9 +125,6 @@ const select = {
     initAccordion(){
       const thisProduct = this;
 
-      // //find the clickable trigger
-      // const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
-
       //START: add event listener to clickable trigger on event click
       thisProduct.dom.accordionTrigger.addEventListener('click', function(event){
         //prevent default action for event
@@ -331,7 +328,6 @@ const select = {
     announce(){
       const thisWidget = this;
 
-      // const event = new Event('updated');
       const event = new CustomEvent('updated', {
         bubbles: true
       })
@@ -388,7 +384,6 @@ const select = {
       //add DOM element to product list
       thisCart.dom.productList.appendChild(generatedDOM);
       //add product to array
-      // thisCart.products.push(menuProduct);
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
 
       thisCart.update();
@@ -427,19 +422,12 @@ const select = {
         thisCart.totalPrice = 0;
       }
 
-      console.log('deliverFee: ', deliveryFee);
-      console.log('totalNumber: ', totalNumber);
-      console.log('subtotalPrice: ', subtotalPrice);
-      console.log('totalPrice: ', thisCart.totalPrice);
-      console.log('DOM element totalPrice: ', thisCart.dom.totalPrice);
-
       //update subtotalPrice, totalNumber, deliverFee in HTML
-      thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+      thisCart.dom.deliveryFee.innerHTML = totalNumber > 0 ? deliveryFee : 0;
       thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
       thisCart.dom.totalNumber.innerHTML = totalNumber;
       
       //update totalPrice for all references
-      // thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
       for(const totalPriceElem of thisCart.dom.totalPrice){
         if(totalPriceElem){
           totalPriceElem.innerHTML = thisCart.totalPrice;
@@ -492,13 +480,12 @@ const select = {
 
       const event = new CustomEvent('remove', {
         bubbles: true,
-        dteail: {
+        detail: {
           cartProduct: thisCartProduct,
         },
       });
 
       thisCartProduct.dom.wrapper.dispatchEvent(event);
-      // console.log('method remove: ');
     }
 
     initActions(){
@@ -510,7 +497,7 @@ const select = {
 
       thisCartProduct.dom.remove.addEventListener('click', function(event){
         event.preventDefault();
-        thisCartProduct.cart.remove(thisCartProduct);
+        thisCartProduct.remove();
       });
     }
   }
