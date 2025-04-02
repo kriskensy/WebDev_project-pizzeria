@@ -23,6 +23,9 @@ export const select = {
         amountWidget: '.widget-amount',
         cartButton: '[href="#add-to-cart"]',
       },
+      // nav: {
+      //   links: '.main-nav a',
+      // },
       widgets: {
         amount: {
           input: 'input.amount',
