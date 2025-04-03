@@ -23,9 +23,6 @@ export const select = {
         amountWidget: '.widget-amount',
         cartButton: '[href="#add-to-cart"]',
       },
-      // nav: {
-      //   links: '.main-nav a',
-      // },
       widgets: {
         amount: {
           input: 'input.amount',
@@ -41,15 +38,15 @@ export const select = {
               output: '.output',
           },
         },
+      },
         booking: {
           peopleAmount: '.people-amount',
           hoursAmount: '.hours-amount',
           tables: '.floor-plan .table',
         },
         nav: {
-            links: '.main-nav a',
+          links: '.main-nav a',
         },
-      },
       cart: {
         productList: '.cart__order-summary',
         toggleTrigger: '.cart__summary',
