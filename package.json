@@ -49,6 +49,7 @@
     },
     "dependencies": {
         "eazy-logger": "^4.0.1",
+        "flatpickr": "^4.6.13",
         "json-server": "^1.0.0-beta.3"
     }
 }
