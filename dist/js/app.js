@@ -96,14 +96,14 @@ const app = {
       return rawResponse.json();
     })
     .then(function(parsedResponse){
-      console.log('parsedResponse: ', parsedResponse);
+      // console.log('parsedResponse: ', parsedResponse); //TODO skasuj
       //save parsedResponse as thisApp.data.products
       thisApp.data.products = parsedResponse;
       //execute initMenu method
       thisApp.initMenu();
     });
 
-    console.log('thisApp.data', JSON.stringify(thisApp.data));
+    // console.log('thisApp.data', JSON.stringify(thisApp.data)); //TODO skasuj
   },
 
   init: function(){

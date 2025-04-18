@@ -119,7 +119,7 @@ class Booking{
     }
   }
 
-  updateDOM(){
+  updateDOM(){ //TODO sprawdz cala metode
     const thisBooking = this;
 
     //table selection reset
@@ -142,7 +142,7 @@ class Booking{
           tableId = parseInt(tableId);
         }
 
-        if(!allAvailable && thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId) > -1){
+        if(!allAvailable && thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)){
           table.classList.add(classNames.booking.tableBooked);
         }
         else{
@@ -165,6 +165,8 @@ class Booking{
     this.dom.hourPicker = container.querySelector(select.widgets.hourPicker.wrapper);
 
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+
+    thisBooking.dom.form = container.querySelector(select.booking.form);
   }
 
   initWidgets(){
@@ -196,6 +198,11 @@ class Booking{
 
     thisBooking.dom.wrapper.addEventListener("click", (event) =>{
       thisBooking.initTables(event);
+    });
+
+    thisBooking.dom.form.addEventListener('submit', (event) =>{
+      event.preventDefault();
+      thisBooking.sendBooking();
     })
   }
 
@@ -241,6 +248,62 @@ class Booking{
     }
   }
 
+  sendBooking(){
+    const thisBooking = this;
+    const url = settings.db.url + '/' + settings.db.bookings;
+
+    const payload = {
+      date: thisBooking.datePicker.value,
+      hour: thisBooking.hourPicker.value,
+      table: thisBooking.selectedTable ? parseInt(thisBooking.selectedTable) : null,
+      duration: parseInt(thisBooking.hoursAmount.value),
+      ppl: parseInt(thisBooking.peopleAmount.value),
+      starters: [],
+      phone: thisBooking.dom.wrapper.querySelector(select.booking.phone).value,
+      address: thisBooking.dom.wrapper.querySelector(select.booking.address).value,
+    };
+
+    //if any starter is selected, water is added automatically and possibly the others, but without water
+    const checkedStarters = thisBooking.dom.wrapper.querySelectorAll('input[name="starter"]:checked');
+
+    if(checkedStarters){
+      payload.starters.push('water');
+
+      for(const starter of checkedStarters){
+        if(starter.value != 'water'){
+          payload.starters.push(starter.value);
+        }
+      }
+    }
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+
+    fetch(url, options)
+    .then(response => {
+      if (!response.ok) throw new Error('Booking failed!');
+      return response.json();
+    })
+    .then(data => {
+      alert('Booking successful! Table: ' + data.table + ' on ' + data.date + ' at ' + data.hour + '.');
+      thisBooking.makeBooked(
+        payload.date,
+        payload.hour,
+        payload.duration,
+        payload.table,
+      );
+      thisBooking.updateDOM();
+      thisBooking.resetTableSelection();
+    })
+    .catch(error => {
+      alert('Error: ' + error.message);
+    });
+  }
 }
 
 export default Booking;

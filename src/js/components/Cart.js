@@ -139,7 +139,7 @@ class Cart{
       
       fetch(url, options);
 
-      console.log('object payload: ', payload);
+      // console.log('object payload: ', payload); //TODO skasuj
     }
   }
 
