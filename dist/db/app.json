@@ -325,148 +325,32 @@
       ]
     },
     {
-      "id": "15d3",
+      "id": "0877",
       "date": "2025-04-20",
-      "hour": "16:30",
-      "table": 3,
-      "duration": null,
-      "ppl": null,
+      "hour": "15:00",
+      "table": 2,
+      "duration": 1,
+      "ppl": 1,
       "starters": [
         "water",
         "bread"
       ],
-      "phone": "5435",
-      "address": "dxg"
+      "phone": "dfgh",
+      "address": "sdgh"
     },
     {
-      "id": "005c",
-      "date": "2025-04-19",
-      "hour": "16:00",
-      "table": 2,
-      "duration": 2,
-      "ppl": 3,
-      "starters": [],
-      "phone": "3252",
-      "address": "cxgfh"
-    },
-    {
-      "id": "c68d",
-      "date": "2025-04-19",
-      "hour": "16:00",
-      "table": 2,
-      "duration": 1,
-      "ppl": 1,
-      "starters": [],
-      "phone": "34563",
-      "address": "fghj"
-    },
-    {
-      "id": "f404",
+      "id": "2ab0",
       "date": "2025-04-20",
-      "hour": "17:30",
+      "hour": "18:30",
       "table": 2,
-      "duration": 1,
-      "ppl": 1,
-      "starters": [
-        "bread"
-      ],
-      "phone": "yukt",
-      "address": "fu"
-    },
-    {
-      "id": "59e0",
-      "date": "2025-04-18",
-      "hour": "16:30",
-      "table": 1,
-      "duration": 1,
-      "ppl": 1,
-      "starters": [
-        {
-          "0": {}
-        }
-      ],
-      "phone": "dsfg",
-      "address": "fdgs"
-    },
-    {
-      "id": "2d88",
-      "date": "2025-04-18",
-      "hour": "19:30",
-      "table": 3,
-      "duration": 2,
-      "ppl": 2,
-      "starters": [
-        "bread"
-      ],
-      "phone": "df",
-      "address": "d"
-    },
-    {
-      "id": "be6e",
-      "date": "2025-04-18",
-      "hour": "16:30",
-      "table": 2,
-      "duration": 2,
-      "ppl": 2,
-      "starters": [],
-      "phone": "dsfg",
-      "address": "sdf"
-    },
-    {
-      "id": "4c7b",
-      "date": "2025-04-18",
-      "hour": "20:00",
-      "table": null,
-      "duration": 2,
-      "ppl": 2,
-      "starters": [
-        "water",
-        "bread"
-      ],
-      "phone": "dsf",
-      "address": "sd"
-    },
-    {
-      "id": "5d44",
-      "date": "2025-04-18",
-      "hour": "18:00",
-      "table": null,
-      "duration": 1,
+      "duration": 3,
       "ppl": 1,
       "starters": [
         "water",
         "bread"
       ],
-      "phone": "dfg",
-      "address": "dfgh"
-    },
-    {
-      "id": "77e3",
-      "date": "2025-04-18",
-      "hour": "18:00",
-      "table": null,
-      "duration": 1,
-      "ppl": 1,
-      "starters": [
-        "water",
-        "bread"
-      ],
-      "phone": "dfg",
-      "address": "dfgh"
-    },
-    {
-      "id": "c910",
-      "date": "2025-04-18",
-      "hour": "18:00",
-      "table": 3,
-      "duration": 2,
-      "ppl": 2,
-      "starters": [
-        "water",
-        "bread"
-      ],
-      "phone": "fhdgj",
-      "address": "dfj"
+      "phone": "fdgh",
+      "address": "sdfxhg"
     }
   ]
 }

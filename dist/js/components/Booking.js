@@ -119,7 +119,7 @@ class Booking{
     }
   }
 
-  updateDOM(){ //TODO sprawdz cala metode
+  updateDOM(){ //TODO sprawdz metode
     const thisBooking = this;
 
     //table selection reset
@@ -128,21 +128,19 @@ class Booking{
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
 
-    let allAvailable = false;
-
-    if(typeof thisBooking.booked[thisBooking.date] == 'undefined' 
-      || typeof thisBooking.booked[thisBooking.date][thisBooking.hour] == 'undefined')
-      {
-        allAvailable = true;
-      }
+    const isHourBooked = thisBooking.booked[thisBooking.date] && thisBooking.booked[thisBooking.date][thisBooking.hour]
+    // console.log('isHourBooked: ', isHourBooked);
 
       for(let table of thisBooking.dom.tables){
-        let tableId = table.getAttribute(settings.booking.tableIdAttribute);
-        if(!isNaN(tableId)){
-          tableId = parseInt(tableId);
-        }
+        const tableId = parseInt(table.getAttribute(settings.booking.tableIdAttribute));
+        const isBooked = isHourBooked && thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId);
 
-        if(!allAvailable && thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)){
+        // console.log('thisBooking.booked:', thisBooking.booked);
+        // console.log('Selected date:', thisBooking.date);
+        // console.log('Selected hour:', thisBooking.hour);
+
+        // console.log('isBooked: ', isBooked);
+        if(isBooked){
           table.classList.add(classNames.booking.tableBooked);
         }
         else{
