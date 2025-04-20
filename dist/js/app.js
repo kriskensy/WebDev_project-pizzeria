@@ -2,6 +2,7 @@ import { settings, select, classNames } from "./settings.js";
 import Product from "./components/Product.js";
 import Cart from "./components/Cart.js";
 import Booking from "./components/Booking.js";
+import Homepage from "./components/Homepage.js";
 
 const app = {
   initBooking: function(){
@@ -17,7 +18,7 @@ const app = {
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
 
-    const idFromHash = window.location.hash.replace('#', '');
+    const idFromHash = window.location.hash.replace(/^#\/?/, '');
 
     let pageMatchingHash = thisApp.pages[0].id;
 
@@ -28,7 +29,7 @@ const app = {
       }
     }
     
-    thisApp.activatePage(idFromHash);
+    thisApp.activatePage(pageMatchingHash);
 
     for(let link of thisApp.navLinks){
       link.addEventListener('click', function(event){
@@ -96,23 +97,41 @@ const app = {
       return rawResponse.json();
     })
     .then(function(parsedResponse){
-      // console.log('parsedResponse: ', parsedResponse); //TODO skasuj
       //save parsedResponse as thisApp.data.products
       thisApp.data.products = parsedResponse;
       //execute initMenu method
       thisApp.initMenu();
     });
+  },
 
-    // console.log('thisApp.data', JSON.stringify(thisApp.data)); //TODO skasuj
+  initBooking: function(){
+    const thisApp = this;
+
+    const bookingContainer = document.querySelector(select.containerOf.booking);
+    thisApp.booking = new Booking(bookingContainer);
+  },
+
+  initHomepage: function(){
+    const thisApp = this;
+
+    const homepageContainer = document.querySelector(select.containerOf.homepage);
+    thisApp.homepage = new Homepage(homepageContainer);
   },
 
   init: function(){
     const thisApp = this;
 
     thisApp.initPages();
+
+    window.addEventListener('hashchange', () =>{
+      const idFromHash = window.location.hash.replace(/^#\/?/, '');
+      app.activatePage(idFromHash);
+    })
+
     thisApp.initData();
     thisApp.initCart();
     thisApp.initBooking();
+    thisApp.initHomepage();
   },
 };
 

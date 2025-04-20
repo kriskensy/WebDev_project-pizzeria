@@ -6,6 +6,7 @@ export const select = {
       homepageWidget: '#template-homepage-widget',
       },
       containerOf: {
+        homepage: '.homepage-wrapper',
         menu: '#product-list',
         cart: '#cart',
         pages: '#pages',
@@ -40,17 +41,17 @@ export const select = {
             output: '.output',
         },
       },
-        booking: {
-          peopleAmount: '.people-amount',
-          hoursAmount: '.hours-amount',
-          tables: '.floor-plan .table',
-          phone: '[name="phone"]',
-          address: '[name="address"]',
-          form: '.booking-form',
-        },
-        nav: {
-          links: '.main-nav a',
-        },
+      booking: {
+        peopleAmount: '.people-amount',
+        hoursAmount: '.hours-amount',
+        tables: '.floor-plan .table',
+        phone: '[name="phone"]',
+        address: '[name="address"]',
+        form: '.booking-form',
+      },
+      nav: {
+        links: '.main-nav a',
+      },
       cart: {
         productList: '.cart__order-summary',
         toggleTrigger: '.cart__summary',
@@ -68,6 +69,12 @@ export const select = {
         price: '.cart__product-price',
         edit: '[href="#edit"]',
         remove: '[href="#remove"]',
+      },
+      homepage: {
+        orderSection: '.homepage-section--order',
+        bookingSection: '.homepage-section--booking',
+        carousel: '.carousel',
+        fotoGallery: '.foto-gallery-wrapper',
       },
     };
   
