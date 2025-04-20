@@ -21,6 +21,7 @@
           <h2 class="logo__subtitle">the best homemade Italian food</h2>
         </div>
         <div class="main-nav">
+          <a href="#homepage">Home</a>
           <a href="#order">Order</a>
           <a href="#booking">Booking</a>
         </div>
@@ -62,6 +63,9 @@
   </header>
 
   <div id="pages">
+    <section id="homepage">
+      <div class="homepage-wrapper container"></div>
+    </section>
     <section id="order">
       <div id="product-list" class="product-list container"></div>
     </section>
@@ -244,6 +248,42 @@
           <button type="submit" class="btn-secondary">Book table</button>
         </div>
       </form>
+    </div>
+  </script>
+  <script id="template-homepage-widget" type="text/x-handlebars-template">
+    <div class="homepage-container">
+      <div class="homepage-widget">
+
+        <div class="homepage-sections">
+          <div class="homepage-section homepage-section--order">
+            <a href="#/order">
+              <span class="homepage-section__title">ORDER ONLINE</span>
+              <span class="homepage-section__subtitle">Delicious food delivered to your door</span>
+            </a>
+          </div>
+          <div class="homepage-section homepage-section--booking">
+            <a href="#/booking">
+              <span class="homepage-section__title">BOOK A TABLE</span>
+              <span class="homepage-section__subtitle">Delicious food delivered to your table</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="opening-hours">
+          <h2 class="opening-hours__title">OPENING HOURS</h2>
+          <p class="opening-hours__subtitle">TUE-SUN, 12PM - 12AM</p>
+        </div>
+
+        <div class="carousel"></div>
+
+        <div class="foto-gallery">
+          <div class="foto-gallery-wrapper"></div>
+        </div>
+
+      </div>
+    </div>
+    <div class="insta-link">
+      <a href="https://www.instagram.com/" target="_blank">View more on Instagram</a>
     </div>
   </script>
 </body>
