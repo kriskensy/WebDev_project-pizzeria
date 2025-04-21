@@ -104,13 +104,6 @@ const app = {
     });
   },
 
-  initBooking: function(){
-    const thisApp = this;
-
-    const bookingContainer = document.querySelector(select.containerOf.booking);
-    thisApp.booking = new Booking(bookingContainer);
-  },
-
   initHomepage: function(){
     const thisApp = this;
 

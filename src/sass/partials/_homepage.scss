@@ -1,1 +1,117 @@
-//TODO implementation
+.homepage-container{
+    background-color: $color-light;
+    border-radius: $radius;
+    margin: $base-size * 4 auto;
+    padding: $base-size * 4 $base-size * 2;
+}
+
+.homepage-widget{
+    text-align: center;
+    padding: 8px;
+}
+
+.homepage-sections{
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.homepage-section{
+  position: relative;
+  width: 320px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  transition: $transition;
+}
+
+.homepage-section a{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+  font-size: 22px;
+  color: $color-light;
+  text-decoration: none;
+}
+
+.homepage-section__title{
+  position: relative;
+  display: block;
+  transition: $transition;
+}
+
+.homepage-section__subtitle{
+  position: relative;
+  font-size: 14px;
+  opacity: 0;
+  transition: $transition;
+}
+
+.homepage-section:hover .homepage-section__title{
+  transform: $transform;
+}
+
+.homepage-section:hover .homepage-section__subtitle{
+  opacity: 1;
+}
+
+.homepage-section--order{
+  background-image: url("../../images/homepage/pizza-1.jpg");
+  border-radius: $radius;
+}
+
+.homepage-section--booking{
+  background-image: url("../../images/homepage/pizza-2.jpg");
+  border-radius: $radius;
+}
+
+.opening-hours{
+  display: flex;
+  height: 160px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-main;
+  color: $color-light;
+  padding: 6px;
+  font-weight: bold;
+  border-radius: $radius;
+}
+
+.opening-hours__title{
+  font-size: 22px;
+}
+
+.opening-hours__subtitle{
+  font-size: 14px;
+}
+
+//TODO karuzela + galeria zdjec
+
+.insta-link{
+  text-align: left;
+  margin-left: 10px;
+  margin-top: 16px;
+}
+
+.insta-link a{
+  text-decoration: none;
+  color: $color-dark;
+  font-size: 14px;
+  transition: $transition;
+}
+
+.insta-link a:hover{
+  color: $color-main;
+  font-size: 1.2em;
+}
