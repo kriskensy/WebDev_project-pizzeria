@@ -74,7 +74,7 @@ export const select = {
         orderSection: '.homepage-section--order',
         bookingSection: '.homepage-section--booking',
         carousel: '.carousel',
-        fotoGallery: '.foto-gallery-wrapper',
+        fotoGalleryWrapper: '.foto-gallery-wrapper',
       },
     };
   
@@ -130,6 +130,16 @@ export const settings = {
     defaultDeliveryFee: 5,
     },
 };
+
+export const homepageGalleryImages = [
+  "images/homepage/pizza-3.jpg",
+  "images/homepage/pizza-4.jpg",
+  "images/homepage/pizza-5.jpg",
+  "images/homepage/pizza-6.jpg",
+  "images/homepage/pizza-7.jpg",
+  "images/homepage/pizza-8.jpg",
+  "images/homepage/pizza-9.jpg",
+];
   
 export const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),

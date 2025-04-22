@@ -1,4 +1,4 @@
-import { select, templates } from "../settings.js";
+import { select, templates, homepageGalleryImages } from "../settings.js";
 import Carousel from "./Carousel.js";
 
 class Homepage{
@@ -7,7 +7,6 @@ class Homepage{
 
     this.render(element);
     this.initWidgets();
-    
   }
 
   render(container){
@@ -17,25 +16,40 @@ class Homepage{
     this.dom.wrapper = container;
     this.dom.wrapper.innerHTML = templates.homepageWidget();
 
-    console.log('homepageWIdget: ', templates.homepageWidget);
+    // console.log('homepageWIdget: ', templates.homepageWidget);
 
     this.dom.orderSection = container.querySelector(select.homepage.orderSection);
     this.dom.bookingSection = container.querySelector(select.homepage.bookingSection);
     this.dom.carousel = container.querySelector(select.homepage.carousel);
-    this.dom.fotoGallery = container.querySelector(select.homepage.fotoGallery);
+    this.dom.fotoGallery = container.querySelector(select.homepage.fotoGalleryWrapper);
 
     this.renderFotoGallery();
   }
 
   renderFotoGallery(){
     const thisHomepage = this;
-    //TODO implemenattion
 
+    const fragment = document.createDocumentFragment();
+    thisHomepage.dom.fotoGallery.innerHTML = '';
+
+    for(let imagePath of homepageGalleryImages){
+      const imageWrapper = document.createElement("div");
+      imageWrapper.classList.add("gallery-item");
+
+      const image = document.createElement("img");
+      image.src = imagePath;
+      image.alt = "Sweet foto";
+
+      imageWrapper.appendChild(image);
+      fragment.appendChild(imageWrapper);
+    }
+
+    thisHomepage.dom.fotoGallery.appendChild(fragment);
   }
 
   initCarousel(){
     const thisHomepage = this;
-    //TODO implemenattion
+    //TODO implementation
 
   }
 
