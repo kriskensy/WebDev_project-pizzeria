@@ -86,6 +86,7 @@
   padding: 6px;
   font-weight: bold;
   border-radius: $radius;
+  margin-bottom: 20px;
 }
 
 .opening-hours__title{
@@ -96,7 +97,70 @@
   font-size: 14px;
 }
 
-//TODO karuzela + galeria zdjec
+.foto-gallery-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.foto-gallery-item{
+  position: relative;
+  width: 190px;
+  height: 175px;
+  overflow: hidden;
+}
+
+.foto-gallery-item img{
+  display: block;
+  transition: $transition;
+  width: 100%;
+  height: 100%;
+}
+
+.foto-gallery-item:hover img{
+  transform: scale(1.1);
+}
+
+.foto-gallery-item .overlay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.foto-gallery-item:hover .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.overlay i {
+  font-size: 24px;
+  color: $color-light;
+  background: $color-dark;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.overlay i:hover {
+  transform: scale(1.1);
+  color: $color-main;
+}
+
+.liked {
+  color: $color-warning;
+}
+
+//TODO karuzela
 
 .insta-link{
   text-align: left;

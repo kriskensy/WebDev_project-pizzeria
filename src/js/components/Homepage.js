@@ -6,7 +6,8 @@ class Homepage{
     const thisHomepage = this;
 
     this.render(element);
-    this.initWidgets();
+    this.renderFotoGallery();
+    this.initActions();
   }
 
   render(container){
@@ -16,14 +17,10 @@ class Homepage{
     this.dom.wrapper = container;
     this.dom.wrapper.innerHTML = templates.homepageWidget();
 
-    // console.log('homepageWIdget: ', templates.homepageWidget);
-
     this.dom.orderSection = container.querySelector(select.homepage.orderSection);
     this.dom.bookingSection = container.querySelector(select.homepage.bookingSection);
     this.dom.carousel = container.querySelector(select.homepage.carousel);
     this.dom.fotoGallery = container.querySelector(select.homepage.fotoGalleryWrapper);
-
-    this.renderFotoGallery();
   }
 
   renderFotoGallery(){
@@ -32,15 +29,28 @@ class Homepage{
     const fragment = document.createDocumentFragment();
     thisHomepage.dom.fotoGallery.innerHTML = '';
 
-    for(let imagePath of homepageGalleryImages){
+    for(let imagePath of homepageGalleryImages.galleryImages){
       const imageWrapper = document.createElement("div");
-      imageWrapper.classList.add("gallery-item");
+      imageWrapper.classList.add("foto-gallery-item");
 
       const image = document.createElement("img");
       image.src = imagePath;
       image.alt = "Sweet foto";
 
+      const overlay = document.createElement("div");
+      overlay.classList.add("overlay");
+
+      const likeIcon = document.createElement("i");
+      likeIcon.classList.add("fas", "fa-heart", "likeIcon");
+      overlay.appendChild(likeIcon);
+
+      const shareIcon = document.createElement("i");
+      shareIcon.classList.add("fas", "fa-share-alt", "shareIcon");
+      overlay.appendChild(shareIcon);
+
       imageWrapper.appendChild(image);
+      imageWrapper.appendChild(overlay);
+
       fragment.appendChild(imageWrapper);
     }
 
@@ -53,7 +63,7 @@ class Homepage{
 
   }
 
-  initWidgets(){
+  initActions(){
     const thisHomepage = this;
 
     thisHomepage.dom.orderSection.addEventListener('click', (event) =>{
@@ -64,6 +74,15 @@ class Homepage{
     thisHomepage.dom.bookingSection.addEventListener('click', (event) =>{
       event.preventDefault();
       window.location.hash = '#/booking';
+    });
+
+    thisHomepage.dom.fotoGallery.addEventListener('click', (event) =>{
+      if(event.target.closest('.likeIcon')){
+        event.target.classList.toggle('liked');
+      }
+      if(event.target.closest('.shareIcon')){
+        alert('Share...');
+      }
     });
   }
 }

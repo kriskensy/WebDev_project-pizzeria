@@ -131,15 +131,19 @@ export const settings = {
     },
 };
 
-export const homepageGalleryImages = [
-  "images/homepage/pizza-3.jpg",
-  "images/homepage/pizza-4.jpg",
-  "images/homepage/pizza-5.jpg",
-  "images/homepage/pizza-6.jpg",
-  "images/homepage/pizza-7.jpg",
-  "images/homepage/pizza-8.jpg",
-  "images/homepage/pizza-9.jpg",
-];
+export const homepageGalleryImages = {
+  carouselImages: [
+    "images/homepage/pizza-3.jpg",
+  ],
+  galleryImages: [
+    "images/homepage/pizza-4.jpg",
+    "images/homepage/pizza-5.jpg",
+    "images/homepage/pizza-6.jpg",
+    "images/homepage/pizza-7.jpg",
+    "images/homepage/pizza-8.jpg",
+    "images/homepage/pizza-9.jpg",
+  ],
+};
   
 export const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
