@@ -97,6 +97,37 @@
   font-size: 14px;
 }
 
+.carousel{
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.carousel-slides-container{
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.carousel-item{
+  display: flex;
+  align-items: center;
+  min-width: 100%;
+}
+
+.carousel-item img{
+  width: 60%;
+  height: auto;
+  display: block;
+}
+
+.carousel-text{
+  width: 40%;
+  padding: 20px;
+  font-size: 1.2em;
+  color: $color-dark;
+}
+
 .foto-gallery-wrapper{
   display: flex;
   flex-wrap: wrap;
@@ -122,7 +153,7 @@
   transform: scale(1.1);
 }
 
-.foto-gallery-item .overlay {
+.foto-gallery-item .overlay{
   position: absolute;
   display: flex;
   justify-content: center;
@@ -137,12 +168,12 @@
   pointer-events: none;
 }
 
-.foto-gallery-item:hover .overlay {
+.foto-gallery-item:hover .overlay{
   opacity: 1;
   pointer-events: auto;
 }
 
-.overlay i {
+.overlay i{
   font-size: 24px;
   color: $color-light;
   background: $color-dark;
@@ -151,7 +182,7 @@
   cursor: pointer;
 }
 
-.overlay i:hover {
+.overlay i:hover{
   transform: scale(1.1);
   color: $color-main;
 }
@@ -159,8 +190,6 @@
 .liked {
   color: $color-warning;
 }
-
-//TODO karuzela
 
 .insta-link{
   text-align: left;

@@ -132,8 +132,19 @@ export const settings = {
 };
 
 export const homepageGalleryImages = {
-  carouselImages: [
-    "images/homepage/pizza-3.jpg",
+  carouselItems: [
+    { 
+      src: "images/homepage/pizza-3.jpg", 
+      text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis, ut ad?" 
+    },
+    { 
+      src: "images/homepage/pizza-3.jpg", 
+      text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis, ut ad?" 
+    },
+    { 
+      src: "images/homepage/pizza-3.jpg", 
+      text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis, ut ad?" 
+    },
   ],
   galleryImages: [
     "images/homepage/pizza-4.jpg",

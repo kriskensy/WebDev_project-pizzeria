@@ -7,6 +7,7 @@ class Homepage{
 
     this.render(element);
     this.renderFotoGallery();
+    this.initCarousel();
     this.initActions();
   }
 
@@ -59,8 +60,8 @@ class Homepage{
 
   initCarousel(){
     const thisHomepage = this;
-    //TODO implementation
-
+    
+    thisHomepage.carousel = new Carousel(thisHomepage.dom.carousel);
   }
 
   initActions(){
