@@ -1,3 +1,5 @@
+"use strict";
+
 import { select, templates, homepageGalleryImages } from "../settings.js";
 import Carousel from "./Carousel.js";
 

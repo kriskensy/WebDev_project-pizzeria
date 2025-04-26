@@ -1,3 +1,5 @@
+"use strict";
+
 import { settings, select, classNames, templates } from "../settings.js";
 import CartProduct from "./CartProduct.js";
 import utils from "../utils.js";
@@ -52,30 +54,25 @@ class Cart{
     add(menuProduct){
       const thisCart = this;
 
-      //generate HTML based on template
       const generatedHTML = templates.cartProduct(menuProduct);
-      //create DOM element
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
-      //add DOM element to product list
-      thisCart.dom.productList.appendChild(generatedDOM);
-      //add product to array
-      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
 
+      thisCart.dom.productList.appendChild(generatedDOM);
+      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       thisCart.update();
     }
 
     remove(cartProduct){
       const thisCart = this;
 
-      //remove product from HTML
       cartProduct.dom.wrapper.remove();
-      //remove information about product from array thisCart.products
+
       const index = thisCart.products.indexOf(cartProduct);
 
       if(index !== -1){
         thisCart.products.splice(index, 1);
       }
-      //call the update method
+
       thisCart.update();
     }
 
@@ -97,12 +94,10 @@ class Cart{
         thisCart.totalPrice = 0;
       }
 
-      //update subtotalPrice, totalNumber, deliverFee in HTML
       thisCart.dom.deliveryFee.innerHTML = totalNumber > 0 ? deliveryFee : 0;
       thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
       thisCart.dom.totalNumber.innerHTML = totalNumber;
       
-      //update totalPrice for all references
       for(const totalPriceElem of thisCart.dom.totalPrice){
         if(totalPriceElem){
           totalPriceElem.innerHTML = thisCart.totalPrice;
@@ -114,7 +109,6 @@ class Cart{
       const thisCart = this;
       const url = settings.db.url + '/' + settings.db.orders;
 
-      //address and phone are inputs => use 'value'
       const payload = {
         address: thisCart.dom.wrapper.querySelector(select.cart.address).value,
         phone: thisCart.dom.wrapper.querySelector(select.cart.phone).value,

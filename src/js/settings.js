@@ -1,3 +1,5 @@
+"use strict";
+
 export const select = {
     templateOf: {
       menuProduct: "#template-menu-product",

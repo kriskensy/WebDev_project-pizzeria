@@ -1,3 +1,5 @@
+"use strict";
+
 class BaseWidget {
   constructor(wrapperElement, initialValue){
     const thisWidget = this;
@@ -18,12 +20,11 @@ class BaseWidget {
     const thisWidget = this;
 
     const newValue = thisWidget.parseValue(value);
-    //add validation
     const valueInputIsNumber = newValue != thisWidget.correctValue && thisWidget.isValid(newValue);
 
     if(valueInputIsNumber){
     thisWidget.correctValue = newValue;
-    //info about product price change
+
     thisWidget.announce();
     }
     

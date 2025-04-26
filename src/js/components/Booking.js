@@ -1,3 +1,5 @@
+"use strict";
+
 import { settings, select, classNames, templates } from "../settings.js";
 import utils from "../utils.js";
 import AmountWidget from "./AmountWidget.js";
@@ -37,15 +39,11 @@ class Booking{
       ],
     };
 
-    // console.log('getData params: ', params);
-
     const urls = {
       booking:       settings.db.url + '/' + settings.db.bookings + '?' + params.booking.join('&'),
       eventsCurrent: settings.db.url + '/' + settings.db.events   + '?' + params.eventsCurrent.join('&'),
       eventsRepeat:  settings.db.url + '/' + settings.db.events   + '?' + params.eventsRepeat.join('&'),
     };
-
-    // console.log('urls: ', urls);
 
     Promise.all([
       fetch(urls.booking),
@@ -63,9 +61,6 @@ class Booking{
         ]);
       })
       .then(function([booking, eventsCurrent, eventsRepeat]){
-        // console.log(booking);
-        // console.log(eventsCurrent);
-        // console.log(eventsRepeat);
         thisBooking.parseData(booking, eventsCurrent, eventsRepeat);
       });
   }
@@ -94,8 +89,6 @@ class Booking{
       }
     }
 
-    // console.log('thisBooking.booked: ', thisBooking.booked);
-
     thisBooking.updateDOM();
   }
 
@@ -109,7 +102,6 @@ class Booking{
     const startHour = utils.hourToNumber(hour);
 
     for(let hourBlock = startHour; hourBlock < startHour + duration; hourBlock += 0.5){
-      // console.log('loop: ', hourBlock);
 
       if(typeof thisBooking.booked[date][hourBlock] == 'undefined'){
         thisBooking.booked[date][hourBlock] = [];
@@ -119,27 +111,20 @@ class Booking{
     }
   }
 
-  updateDOM(){ //TODO sprawdz metode
+  updateDOM(){
     const thisBooking = this;
 
-    //table selection reset
     thisBooking.resetTableSelection();
 
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
 
     const isHourBooked = thisBooking.booked[thisBooking.date] && thisBooking.booked[thisBooking.date][thisBooking.hour]
-    // console.log('isHourBooked: ', isHourBooked);
 
       for(let table of thisBooking.dom.tables){
         const tableId = parseInt(table.getAttribute(settings.booking.tableIdAttribute));
         const isBooked = isHourBooked && thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId);
 
-        // console.log('thisBooking.booked:', thisBooking.booked);
-        // console.log('Selected date:', thisBooking.date);
-        // console.log('Selected hour:', thisBooking.hour);
-
-        // console.log('isBooked: ', isBooked);
         if(isBooked){
           table.classList.add(classNames.booking.tableBooked);
         }
@@ -171,24 +156,9 @@ class Booking{
     const thisBooking = this;
 
     thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
-    // thisBooking.dom.peopleAmount.addEventListener('updated', function(){
-
-    // });
-
     thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
-    // thisBooking.dom.hoursAmount.addEventListener('updated', function(){
-
-    // });
-
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
-    // thisBooking.dom.datePicker.addEventListener('updated', function(){
-
-    // });
-
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
-    // thisBooking.dom.hourPicker.addEventListener('updated', function(){
-
-    // });
 
     thisBooking.dom.wrapper.addEventListener('updated', () =>{
       thisBooking.updateDOM();
@@ -221,7 +191,6 @@ class Booking{
 
     if(clickedElement){
       const tableNumber = clickedElement.getAttribute('data-table'); 
-      // const tableNumber = clickedElement.classList.contains(settings.booking.tableIdAttribute); 
       const tableBooked = clickedElement.classList.contains(classNames.booking.tableBooked);
       const tableSelected = clickedElement.classList.contains(classNames.booking.tableSelected);
 
@@ -236,7 +205,6 @@ class Booking{
         return;
       }
 
-      //table selection reset
       thisBooking.resetTableSelection();
 
       if(tableNumber && !tableSelected){
@@ -261,7 +229,6 @@ class Booking{
       address: thisBooking.dom.wrapper.querySelector(select.booking.address).value,
     };
 
-    //if any starter is selected, water is added automatically and possibly the others, but without water
     const checkedStarters = thisBooking.dom.wrapper.querySelectorAll('input[name="starter"]:checked');
 
     if(checkedStarters){

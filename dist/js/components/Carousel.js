@@ -1,3 +1,5 @@
+"use strict";
+
 import { homepageGalleryImages } from "../settings.js";
 
 class Carousel {

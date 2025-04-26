@@ -1,3 +1,5 @@
+"use strict";
+
 import { settings, select } from "../settings.js";
 import BaseWidget from "./BaseWidget.js";
 
@@ -9,8 +11,6 @@ class AmountWidget extends BaseWidget{
 
       thisWidget.getElements(element);
       thisWidget.initActions();
-
-      // console.log('AmountWidget: ', thisWidget);
     }
 
     getElements(element){

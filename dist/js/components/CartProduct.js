@@ -1,3 +1,5 @@
+"use strict";
+
 import { select } from "../settings.js";
 import AmountWidget from "./AmountWidget.js";
 
@@ -35,7 +37,6 @@ class CartProduct{
       thisCartProduct.dom.amountWidget.addEventListener('updated', function(){
         thisCartProduct.amount = thisCartProduct.amountWidget.value;
         thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
-        //price update in HTML
         thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
       });
     }
